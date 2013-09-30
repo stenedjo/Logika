@@ -1,0 +1,910 @@
+\documentclass[a4paper]{book}
+\usepackage{amssymb,geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\renewcommand{\chaptername}{Глава}
+\renewcommand{\contentsname}{Садржај}
+\renewcommand{\figurename}{Слика}
+\newcommand{\izvaci}[1]{}
+\newcounter{zadatak}
+\newcommand{\zad}{\addtocounter{zadatak}{1}{\bf Задатак \thezadatak. }}
+\newcommand{\tj}{\mbox{тј.} }
+\date{}
+\author{Недељко Стефановић}
+\title{МАТЕМАТИЧКА ЛОГИКА}
+\begin{document}
+\maketitle
+
+\thispagestyle{empty}
+
+\vspace*{\fill}
+\begin{flushright}
+\Large
+\textit{%
+Овај текст је посвећен професору Славиши Б. Прешићу.}
+\end{flushright}
+\vfill
+
+\pagebreak
+
+\thispagestyle{empty}
+
+\noindent
+Copyright \copyright{} 2013 by Nedeljko Stefanovic.
+\\[2em]
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3;
+with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+A copy of the license is included in the section entitled "GNU
+Free Documentation License".
+
+\tableofcontents
+\chapter{Уводни појмови}
+
+\indent
+
+Овде ћемо изложити неке основне појмове без којих је савремено излагање било које области математике практично%
+\footnote{Није немогуће изградити математику на неким другим појмовима, али је онда њих потребно увести.
+Такође, овде се определило за излагање на свакако данас најраширенији начин.}
+немогуће.
+
+\section{Исказна логика}
+
+\subsection{Појам исказа}
+
+\indent
+
+Исказ је тврдња којој се може придружити тачно једна од две истинитосне вредности -- тачно или нетачно.
+Примери исказа су:
+\begin{enumerate}
+\item
+Стефан Дечански је био српски краљ.
+\item
+Лесковац је у Азији.
+\item
+Херодот је почео да пише историју у среду.
+\end{enumerate}
+при чему је први тачан, други нетачан, а трећем није позната истинитосна вредност (али она свакако постоји).
+Искази нису,
+\begin{enumerate}
+\item
+Можда има живота ван Земље.
+\item
+Колико планета има Сунчев систем?
+\item
+Плаво седење стоји низ плакање.
+\end{enumerate}
+
+Прва реченица није категорична, друга није тврдња (већ питање), а трећа нема смисла.
+
+\subsection{Исказни везници}
+
+\indent
+
+Од једноставнијих исказа можемо формирати сложеније помоћу исказних везника.
+На\-ве\-ди\-мо најважније.
+\begin{description}
+\item[Негација] Од исказа $A$ можемо формирати исказ који означавамо са $\lnot A$ који
+читамо "није $A$". Он је тачан ако је исказ $A$ нетачан, а у супротном је нетачан.
+\item[Конјункција] Од исказа $A$ и $B$ можемо формирати исказ који обележавамо са $(A\land B)$
+и који читамо "$A$ и $B$". Он је тачан ако су оба од исказа $A$ и $B$ тачна, а у супротном је нетачан.
+\item[Дисјункција] Од исказа $A$ и $B$ можемо формирати исказ који обележавамо са $(A\lor B)$
+и који читамо "$A$ или $B$". Он је тачан ако је барем један од исказа $A$ и $B$ тачан, а у супротном је нетачан.
+\item[Импликација] Од исказа $A$ и $B$ можемо формирати исказ који обележавамо са $(A\Rightarrow B)$
+и који читамо "ако $A$ онда $B$". Он је нетачан ако је исказ $A$ тачан и исказ $B$ нетачан, а у супротном је тачан.
+\item[Еквиваленција] Од исказа $A$ и $B$ можемо формирати исказ који обележавамо са $(A\Leftrightarrow B)$
+и који читамо "$A$ ако и само ако $B$". Он је тачан ако је искази $A$ и $B$ имају исту истинитосну вредност
+(оба су тачна или оба нетачна), а у супротном је нетачан.
+\end{description}
+
+Напоменимо у вези са импликацијом да се $(A\Rightarrow B)$ изговара још и са "из $A$ следи $B$" или
+"$B$ је последица од $A$". Но, ту се ради о логичкој последици, што не треба мешати са другим врстама последица.
+Логичка последица неког исказа је исказ који је тачан увек када је тачан исказ из кога он следи. Тако на пример,
+исказ "облачно је" је логичка последица исказа "пада киша", а не обрнуто, јер киша свакако не може падати из ведра неба,
+а време може бити облачно и без падавина. Другим речима, ако разговарамо телефоном са неким из другог места и он нам
+саопшти да код њега пада киша, можемо закључити да је код њега облачно. Дакле, важи
+\begin{enumerate}
+\item
+Ако пада киша, онда је облачно,
+\item
+Облачност је логичка последица падања кише.
+\item
+Из падања кише следи да је облачно.
+\end{enumerate}
+
+Осим тога, ако из неког исказа следи неки други, те исказе не треба логички изје\-дна\-ча\-ва\-ти у смислу да се дешавају
+искључиво заједно јер обрнута импликација не мора да важи. Ако у атомобилу нема горива, он свакако не може да се вози.
+Међутим, ако аутомобил не може да се вози, то не значи обавезно
+да нема горива, јер постоји могућност да горива има, али да је аутомобил у квару.
+Такође, израз "ако и само ако" се краће пише "акко".
+
+\subsection{Логички закони}
+
+\indent
+
+Са исказима се може радити апстрактно, \tj без улажења у њихов садржај. Тада се искази обележавају посебним ознакама које се
+зову исказна слова. Она означавају произвољне исказе, с тим да исто исказно слово употребљено на више места означава
+исти (неодређен) исказ. Од исказних слова и везника формирамо формуле. Размотримо следећу формулу:
+\begin{equation}
+\label{zavisnostSamoOdVrednosti}
+((p\lor q)\Rightarrow p).
+\end{equation}
+
+Ако бисмо слова замислили као неке исказе, онда је исказ (\ref{zavisnostSamoOdVrednosti})
+нетачан акко је исказ $p$ нетачан, а исказ $p\lor q$ тачан. Обзиром да за нетачност формуле
+(\ref{zavisnostSamoOdVrednosti}) исказ $p$ мора бити нетачан и да исказ $p\lor q$
+мора бити тачан, а исказ $p\lor q$ је тачан акко је бар један од исказа $p$ и $q$
+тачан, а у овом случају то није исказ $p$, онда иксаз $q$ мора бити тачан.
+
+Дакле, да би исказ (\ref{zavisnostSamoOdVrednosti}) био тачан, мора исказ $p$ да буде нетачан,
+а исказ $q$ тачан. Није тешко уверити се да је у том случају исказ (\ref{zavisnostSamoOdVrednosti})
+заиста нетачан јер је у том случају исказ $(p\lor q)$ тачан, а исказ $p$ нетачан.
+
+Другим речима, исказ (\ref{zavisnostSamoOdVrednosti}) је нетачан у случају када је $p$ нетачно,
+а $q$ тачно, а тачан у свим осталим случајевима.
+
+Исказе који нису формирани од простијих исказа и од исказних слова назовимо простим исказима.
+У претходном примеру, истинитосна вредност сложеног исказа зависи само од истинитосних вредности
+простих исказа од којих је сачињен, а не и од њихове природе. То је тачно у општем случају.
+Истинитосна вредност сложеног исказа формираног од неких простих исказа и исказних везника зависи
+само од истинитосних вредности простих исказа који учествују у том сложеном исказу и од начина
+на који је сложен исказ формиран од простих исказа и исказних везника.
+
+Постоје исказне формуле које представљају тачне исказе при ма којој замени исказних слова исказима.
+Такве формуле зовемо таутологијама. Неке од таутологија су
+$$
+((p\land q)\Rightarrow p),\quad(p\lor\lnot p),\quad\lnot(p\land\lnot p).
+$$
+
+Да би се то проверило, довољно је изабрати два проста исказа -- један који је тачан и један који
+је нетачан и проверити да ли при свим могућим заменама исказних слова у тој формули којима се
+свако исказно слово замењује неким од ова два исказа добија тачан исказ. Један по жељи изабран
+тачан исказ означаваћемо са $\top$, а један по жељи изабран нетачан исказ са $\bot$. За то се
+користе истинитосне таблице које заправо одговарају наведеним дефиницијама исказих везника.
+$$
+\begin{array}[t]{c|c}
+p & \lnot p
+\\
+\hline
+\top & \bot
+\\
+\bot & \top
+\end{array}
+\quad
+\begin{array}[t]{c|c|c}
+p & q & (p\land q)
+\\
+\hline
+\top & \top & \top
+\\
+\top & \bot & \bot
+\\
+\bot & \top & \bot
+\\
+\bot & \bot & \bot
+\end{array}
+\quad
+\begin{array}[t]{c|c|c}
+p & q & (p\lor q)
+\\
+\hline
+\top & \top & \top
+\\
+\top & \bot & \top
+\\
+\bot & \top & \top
+\\
+\bot & \bot & \bot
+\end{array}
+$$
+$$
+\begin{array}[t]{c|c|c}
+p & q & (p\Rightarrow q)
+\\
+\hline
+\top & \top & \top
+\\
+\top & \bot & \bot
+\\
+\bot & \top & \bot
+\\
+\bot & \bot & \bot
+\end{array}
+\quad
+\begin{array}[t]{c|c|c}
+p & q & (p\Leftrightarrow q)
+\\
+\hline
+\top & \top & \top
+\\
+\top & \bot & \top
+\\
+\bot & \top & \top
+\\
+\bot & \bot & \bot
+\end{array}	
+$$
+
+Да ли је формула таутологија, може се проверити табличним методом коришћењем истинитосних таблица.
+Учинимо то на примеру формуле (\ref{zavisnostSamoOdVrednosti}).
+$$
+\begin{array}{c|c|c|c}
+p & q & (p\lor q) & ((p\lor q)\Rightarrow p)
+\\
+\hline
+\top & \top & \top & \top
+\\
+\top & \bot & \top & \top
+\\
+\bot & \top & \top & \bot
+\\
+\bot & \bot & \bot & \top
+\end{array}
+$$
+
+У овом поступку се прво формирају све могућности за доделу исказим слвима која учествују у формули
+вредности тачно и нетчно. Пошто слова у формули има два, таквих могућности има четири.
+Свакој од тих могућности одговара по једна врста табеле. По колонама су означене истинитосне вредности
+сваке од потформула које се појављују у формули при свакој од четири могућности представљених врстама.
+Притом се истинитосне вредности потформула (рачунајући ту и целу формулу) одређују на основу
+истинитосних вредности потформула од којих је директно сачињена преко неког од исказног везника
+и на основу истинитосне таблице за тај исказни везник.
+
+Напоменимо на крају да се заменом простих исказа у сложеном исказу било којим исказима исте исти\-ни\-то\-сне вредности
+добија други сложени исказ исте истинитосне вре\-дно\-сти. То посебно значи да замењујући исказна слова
+у логичким законима исказне логике ма каквим исказима увек добијамо тачан исказ.
+
+\section{Једнакост}
+
+\indent
+
+У математици се једнакост не тумачи као у свакодневном животу где за две свеске кажемо да су исте.
+Код две свеске свакако да постоје неке разлике уочљиве под ми\-кро\-ско\-пом, које се занемарују када се
+каже да су у питању истоветне свеске. Међутим, за два електрона или друге две елементарне честице
+исте врсте у физици се сматра да су сасвим једнаке међу собом, па чак и за неке честице које нису
+елементарне, као што два атома лаког водоника.
+
+Међутим, у свим тим случајевима се у математици сматра да се ради о различитим објектима. Докле год се ради
+о два електрона, а не о једном електрону, сматра се да се ради о различитим објектима.
+У математици једнакост значи да се ради о истом објекту, односно да две ознаке представљају исти објекат.
+Заправо, то је оно што се у математици хтело постићи описом једнакости. Оно што је заправо добијено
+је Лајбницово схватање једнакости по коме су једнаки они објекти који се не могу разликовати.
+Рецимо, два електрона се могу разликовати по положају у простору у неком тренутку.
+
+Понекад се у математици израз "једнакост" у другом значењу. На пример, у геометрији се подударни ликови
+често зову једнаким. Међутим, у том случају се једноставно ради о некоректном изражавању јер за те друге
+појмове увек постоји одговарајући посебан израз, као што је у овом случају "подударност".
+
+Исказ да ознаке $a$ и $b$ представљају исти објекат записује се са
+
+$$
+a=b,
+$$
+а негација тог исказа са
+$$
+a\neq b.
+$$
+Основне одлике једнакости су:
+\begin{description}
+\item[Рефлексивност:]
+Свака ознака представља исти објекат као она сама, \tj $a=a$.
+\item[Симетричност:]
+Ако ознака $a$ представља исти објекат као ознака $b$, \tj $a=b$, онда ознака $b$ представља исти објекат као ознака $a$, \tj $b=a$.
+\item[Транзитивност:]
+Ако ознака $a$ представља исти објекат као ознака $b$, \tj $a=b$, а ознака $b$ представља исти објекат као ознака $c$, \tj $b=c$,
+онда ознака $a$ представља исти објекат као ознака $c$, \tj $a=c$.
+\item[Интензионалност:]
+Међусобно једнаки објекти имају исте особине и на исти начин се односе према другим међусобно једнаким објектима, без обзира
+на то колико се ознака користи за неке од њих. Другим речима, ако је $a=b$, онда објекат представљен ознаком $a$ има исте особине
+као објекат представљен ознаком $b$. Ако је притом и $c=d$ и $e=f$, онда се објекти представљени ознакама $a$, $c$ и $e$
+односе на исти начин као објекти представљени ознакама $b$, $d$ и $f$.
+\end{description}
+
+\section{Квантификатори}
+
+\subsection{Константе}
+
+\indent
+
+Под константом се подразумева објекат који је једнозначно одређен. Он се задаје си\-сте\-мом особина за које се доказује
+да их има тачно један објекат и увођењем ознаке за њега, која до тада није употребљена. Понекад се у математици користи
+иста ознака за различите ствари, што није логички коректно, када се процени да нема опасности од забуне, \tj
+да се из контекста може закључити о ком се контексту тачно ради.
+
+\subsection{Променљиве}
+
+\indent
+
+Променљива је ознака која представља произвољан објекат, \tj о коме се не пре\-тпо\-ста\-вља ниједна друга особина,
+осим оних које имају сви објекти. Заправо, у математици имамо две врсте променљивих -- са ограниченим и неограниченим
+доменом.
+Са неограниченим доменом су оне које представљају ма какав објекат, а са ограниченим су оне које пред\-ста\-вља\-ју ма који од
+неких објеката за које се каже да представљају њен домен.
+И за једне и за друге нам је потребна до тада некоришћена ознака, а за ове друге још и систем особина објеката на које
+се односе, \tj особине које одређују домен.
+
+Записи који садрже променљиве у општем случају нису искази, јер им истинитосна вредност зависи од тога које ћемо
+објекте придружити тим променљивама. Након при\-дру\-жи\-ва\-ња свакој променљивој по неког објекта, водећи рачуна да
+ограниченим променљивама не придружимо објекат ван њеног домена, такав запис постаје исказ ако испуњава раније
+наведене критеријуме за исказ.
+
+\subsection{Квантификатори}
+
+\indent
+
+Изјава да је неки запис $A$ "тачан" за све вредности променљиве $x$ из њеног домена се записује
+$$
+\forall xA,
+$$
+а изјава да је неки запис $A$ "тачан" за бар једну вредност променљиве $x$ из њеног домена се записује
+$$
+\exists xA.
+$$
+
+Овде је реч "тачан" стављена под наводнике, јер запис $A$ може укључивати још неке променљиве, тако да наведени
+записи у општем случају нису искази. Но, нијеан од прет\-хо\-дна два записа не зависи од избора објекта који ће се
+придружити променљивој $x$. Зато се каже да је променљива у тим записима везана.
+
+Запис
+$$
+\forall x\forall y\forall z((x=y\land y=z)\Rightarrow x=z)
+$$
+представља исказ који у представља особину једнакости да је у општем случају транзитивна.
+\section{Скупови}
+
+\indent
+
+Појам скупа вероватно није могуће дефинисати преко неких једноставнијих појмова. Он се јанпрецизније
+заснива аксиоматски, а пре тога ћемо покушати да дамо некакву представу, која би помогла у разликовању
+појма скупа из свакодневног говора и математичког појма скупа и која би омогућила праћење даљег тока
+излагања.
+
+\section{Торке}
+
+\section{Релације}
+
+\section{Функције}
+
+\section{Конгруенције}
+	
+\chapter{Формални системи}
+
+\chapter*{\rlap{GNU Free Documentation License}}
+\addcontentsline{toc}{chapter}{GNU Free Documentation License}
+%\label{label_fdl}
+
+ \begin{center}
+
+       Version 1.3, 3 November 2008
+
+
+ Copyright \copyright{} 2000, 2001, 2002, 2007, 2008  Free Software Foundation, Inc.
+ 
+ \bigskip
+ 
+     \texttt{<http://fsf.org/>}
+  
+ \bigskip
+ 
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
+\end{center}
+
+
+\begin{center}
+{\bf\large Preamble}
+\end{center}
+
+The purpose of this License is to make a manual, textbook, or other
+functional and useful document ``free'' in the sense of freedom: to
+assure everyone the effective freedom to copy and redistribute it,
+with or without modifying it, either commercially or noncommercially.
+Secondarily, this License preserves for the author and publisher a way
+to get credit for their work, while not being considered responsible
+for modifications made by others.
+
+This License is a kind of ``copyleft'', which means that derivative
+works of the document must themselves be free in the same sense.  It
+complements the GNU General Public License, which is a copyleft
+license designed for free software.
+
+We have designed this License in order to use it for manuals for free
+software, because free software needs free documentation: a free
+program should come with manuals providing the same freedoms that the
+software does.  But this License is not limited to software manuals;
+it can be used for any textual work, regardless of subject matter or
+whether it is published as a printed book.  We recommend this License
+principally for works whose purpose is instruction or reference.
+
+
+\begin{center}
+{\Large\bf 1. APPLICABILITY AND DEFINITIONS\par}
+\end{center}
+
+This License applies to any manual or other work, in any medium, that
+contains a notice placed by the copyright holder saying it can be
+distributed under the terms of this License.  Such a notice grants a
+world-wide, royalty-free license, unlimited in duration, to use that
+work under the conditions stated herein.  The ``\textbf{Document}'', below,
+refers to any such manual or work.  Any member of the public is a
+licensee, and is addressed as ``\textbf{you}''.  You accept the license if you
+copy, modify or distribute the work in a way requiring permission
+under copyright law.
+
+A ``\textbf{Modified Version}'' of the Document means any work containing the
+Document or a portion of it, either copied verbatim, or with
+modifications and/or translated into another language.
+
+A ``\textbf{Secondary Section}'' is a named appendix or a front-matter section of
+the Document that deals exclusively with the relationship of the
+publishers or authors of the Document to the Document's overall subject
+(or to related matters) and contains nothing that could fall directly
+within that overall subject.  (Thus, if the Document is in part a
+textbook of mathematics, a Secondary Section may not explain any
+mathematics.)  The relationship could be a matter of historical
+connection with the subject or with related matters, or of legal,
+commercial, philosophical, ethical or political position regarding
+them.
+
+The ``\textbf{Invariant Sections}'' are certain Secondary Sections whose titles
+are designated, as being those of Invariant Sections, in the notice
+that says that the Document is released under this License.  If a
+section does not fit the above definition of Secondary then it is not
+allowed to be designated as Invariant.  The Document may contain zero
+Invariant Sections.  If the Document does not identify any Invariant
+Sections then there are none.
+
+The ``\textbf{Cover Texts}'' are certain short passages of text that are listed,
+as Front-Cover Texts or Back-Cover Texts, in the notice that says that
+the Document is released under this License.  A Front-Cover Text may
+be at most 5 words, and a Back-Cover Text may be at most 25 words.
+
+A ``\textbf{Transparent}'' copy of the Document means a machine-readable copy,
+represented in a format whose specification is available to the
+general public, that is suitable for revising the document
+straightforwardly with generic text editors or (for images composed of
+pixels) generic paint programs or (for drawings) some widely available
+drawing editor, and that is suitable for input to text formatters or
+for automatic translation to a variety of formats suitable for input
+to text formatters.  A copy made in an otherwise Transparent file
+format whose markup, or absence of markup, has been arranged to thwart
+or discourage subsequent modification by readers is not Transparent.
+An image format is not Transparent if used for any substantial amount
+of text.  A copy that is not ``Transparent'' is called ``\textbf{Opaque}''.
+
+Examples of suitable formats for Transparent copies include plain
+ASCII without markup, Texinfo input format, LaTeX input format, SGML
+or XML using a publicly available DTD, and standard-conforming simple
+HTML, PostScript or PDF designed for human modification.  Examples of
+transparent image formats include PNG, XCF and JPG.  Opaque formats
+include proprietary formats that can be read and edited only by
+proprietary word processors, SGML or XML for which the DTD and/or
+processing tools are not generally available, and the
+machine-generated HTML, PostScript or PDF produced by some word
+processors for output purposes only.
+
+The ``\textbf{Title Page}'' means, for a printed book, the title page itself,
+plus such following pages as are needed to hold, legibly, the material
+this License requires to appear in the title page.  For works in
+formats which do not have any title page as such, ``Title Page'' means
+the text near the most prominent appearance of the work's title,
+preceding the beginning of the body of the text.
+
+The ``\textbf{publisher}'' means any person or entity that distributes
+copies of the Document to the public.
+
+A section ``\textbf{Entitled XYZ}'' means a named subunit of the Document whose
+title either is precisely XYZ or contains XYZ in parentheses following
+text that translates XYZ in another language.  (Here XYZ stands for a
+specific section name mentioned below, such as ``\textbf{Acknowledgements}'',
+``\textbf{Dedications}'', ``\textbf{Endorsements}'', or ``\textbf{History}''.)  
+To ``\textbf{Preserve the Title}''
+of such a section when you modify the Document means that it remains a
+section ``Entitled XYZ'' according to this definition.
+
+The Document may include Warranty Disclaimers next to the notice which
+states that this License applies to the Document.  These Warranty
+Disclaimers are considered to be included by reference in this
+License, but only as regards disclaiming warranties: any other
+implication that these Warranty Disclaimers may have is void and has
+no effect on the meaning of this License.
+
+
+\begin{center}
+{\Large\bf 2. VERBATIM COPYING\par}
+\end{center}
+
+You may copy and distribute the Document in any medium, either
+commercially or noncommercially, provided that this License, the
+copyright notices, and the license notice saying this License applies
+to the Document are reproduced in all copies, and that you add no other
+conditions whatsoever to those of this License.  You may not use
+technical measures to obstruct or control the reading or further
+copying of the copies you make or distribute.  However, you may accept
+compensation in exchange for copies.  If you distribute a large enough
+number of copies you must also follow the conditions in section~3.
+
+You may also lend copies, under the same conditions stated above, and
+you may publicly display copies.
+
+
+\begin{center}
+{\Large\bf 3. COPYING IN QUANTITY\par}
+\end{center}
+
+
+If you publish printed copies (or copies in media that commonly have
+printed covers) of the Document, numbering more than 100, and the
+Document's license notice requires Cover Texts, you must enclose the
+copies in covers that carry, clearly and legibly, all these Cover
+Texts: Front-Cover Texts on the front cover, and Back-Cover Texts on
+the back cover.  Both covers must also clearly and legibly identify
+you as the publisher of these copies.  The front cover must present
+the full title with all words of the title equally prominent and
+visible.  You may add other material on the covers in addition.
+Copying with changes limited to the covers, as long as they preserve
+the title of the Document and satisfy these conditions, can be treated
+as verbatim copying in other respects.
+
+If the required texts for either cover are too voluminous to fit
+legibly, you should put the first ones listed (as many as fit
+reasonably) on the actual cover, and continue the rest onto adjacent
+pages.
+
+If you publish or distribute Opaque copies of the Document numbering
+more than 100, you must either include a machine-readable Transparent
+copy along with each Opaque copy, or state in or with each Opaque copy
+a computer-network location from which the general network-using
+public has access to download using public-standard network protocols
+a complete Transparent copy of the Document, free of added material.
+If you use the latter option, you must take reasonably prudent steps,
+when you begin distribution of Opaque copies in quantity, to ensure
+that this Transparent copy will remain thus accessible at the stated
+location until at least one year after the last time you distribute an
+Opaque copy (directly or through your agents or retailers) of that
+edition to the public.
+
+It is requested, but not required, that you contact the authors of the
+Document well before redistributing any large number of copies, to give
+them a chance to provide you with an updated version of the Document.
+
+
+\begin{center}
+{\Large\bf 4. MODIFICATIONS\par}
+\end{center}
+
+You may copy and distribute a Modified Version of the Document under
+the conditions of sections 2 and 3 above, provided that you release
+the Modified Version under precisely this License, with the Modified
+Version filling the role of the Document, thus licensing distribution
+and modification of the Modified Version to whoever possesses a copy
+of it.  In addition, you must do these things in the Modified Version:
+
+\begin{itemize}
+\item[A.] 
+   Use in the Title Page (and on the covers, if any) a title distinct
+   from that of the Document, and from those of previous versions
+   (which should, if there were any, be listed in the History section
+   of the Document).  You may use the same title as a previous version
+   if the original publisher of that version gives permission.
+   
+\item[B.]
+   List on the Title Page, as authors, one or more persons or entities
+   responsible for authorship of the modifications in the Modified
+   Version, together with at least five of the principal authors of the
+   Document (all of its principal authors, if it has fewer than five),
+   unless they release you from this requirement.
+   
+\item[C.]
+   State on the Title page the name of the publisher of the
+   Modified Version, as the publisher.
+   
+\item[D.]
+   Preserve all the copyright notices of the Document.
+   
+\item[E.]
+   Add an appropriate copyright notice for your modifications
+   adjacent to the other copyright notices.
+   
+\item[F.]
+   Include, immediately after the copyright notices, a license notice
+   giving the public permission to use the Modified Version under the
+   terms of this License, in the form shown in the Addendum below.
+   
+\item[G.]
+   Preserve in that license notice the full lists of Invariant Sections
+   and required Cover Texts given in the Document's license notice.
+   
+\item[H.]
+   Include an unaltered copy of this License.
+   
+\item[I.]
+   Preserve the section Entitled ``History'', Preserve its Title, and add
+   to it an item stating at least the title, year, new authors, and
+   publisher of the Modified Version as given on the Title Page.  If
+   there is no section Entitled ``History'' in the Document, create one
+   stating the title, year, authors, and publisher of the Document as
+   given on its Title Page, then add an item describing the Modified
+   Version as stated in the previous sentence.
+   
+\item[J.]
+   Preserve the network location, if any, given in the Document for
+   public access to a Transparent copy of the Document, and likewise
+   the network locations given in the Document for previous versions
+   it was based on.  These may be placed in the ``History'' section.
+   You may omit a network location for a work that was published at
+   least four years before the Document itself, or if the original
+   publisher of the version it refers to gives permission.
+   
+\item[K.]
+   For any section Entitled ``Acknowledgements'' or ``Dedications'',
+   Preserve the Title of the section, and preserve in the section all
+   the substance and tone of each of the contributor acknowledgements
+   and/or dedications given therein.
+   
+\item[L.]
+   Preserve all the Invariant Sections of the Document,
+   unaltered in their text and in their titles.  Section numbers
+   or the equivalent are not considered part of the section titles.
+   
+\item[M.]
+   Delete any section Entitled ``Endorsements''.  Such a section
+   may not be included in the Modified Version.
+   
+\item[N.]
+   Do not retitle any existing section to be Entitled ``Endorsements''
+   or to conflict in title with any Invariant Section.
+   
+\item[O.]
+   Preserve any Warranty Disclaimers.
+\end{itemize}
+
+If the Modified Version includes new front-matter sections or
+appendices that qualify as Secondary Sections and contain no material
+copied from the Document, you may at your option designate some or all
+of these sections as invariant.  To do this, add their titles to the
+list of Invariant Sections in the Modified Version's license notice.
+These titles must be distinct from any other section titles.
+
+You may add a section Entitled ``Endorsements'', provided it contains
+nothing but endorsements of your Modified Version by various
+parties---for example, statements of peer review or that the text has
+been approved by an organization as the authoritative definition of a
+standard.
+
+You may add a passage of up to five words as a Front-Cover Text, and a
+passage of up to 25 words as a Back-Cover Text, to the end of the list
+of Cover Texts in the Modified Version.  Only one passage of
+Front-Cover Text and one of Back-Cover Text may be added by (or
+through arrangements made by) any one entity.  If the Document already
+includes a cover text for the same cover, previously added by you or
+by arrangement made by the same entity you are acting on behalf of,
+you may not add another; but you may replace the old one, on explicit
+permission from the previous publisher that added the old one.
+
+The author(s) and publisher(s) of the Document do not by this License
+give permission to use their names for publicity for or to assert or
+imply endorsement of any Modified Version.
+
+
+\begin{center}
+{\Large\bf 5. COMBINING DOCUMENTS\par}
+\end{center}
+
+
+You may combine the Document with other documents released under this
+License, under the terms defined in section~4 above for modified
+versions, provided that you include in the combination all of the
+Invariant Sections of all of the original documents, unmodified, and
+list them all as Invariant Sections of your combined work in its
+license notice, and that you preserve all their Warranty Disclaimers.
+
+The combined work need only contain one copy of this License, and
+multiple identical Invariant Sections may be replaced with a single
+copy.  If there are multiple Invariant Sections with the same name but
+different contents, make the title of each such section unique by
+adding at the end of it, in parentheses, the name of the original
+author or publisher of that section if known, or else a unique number.
+Make the same adjustment to the section titles in the list of
+Invariant Sections in the license notice of the combined work.
+
+In the combination, you must combine any sections Entitled ``History''
+in the various original documents, forming one section Entitled
+``History''; likewise combine any sections Entitled ``Acknowledgements'',
+and any sections Entitled ``Dedications''.  You must delete all sections
+Entitled ``Endorsements''.
+
+\begin{center}
+{\Large\bf 6. COLLECTIONS OF DOCUMENTS\par}
+\end{center}
+
+You may make a collection consisting of the Document and other documents
+released under this License, and replace the individual copies of this
+License in the various documents with a single copy that is included in
+the collection, provided that you follow the rules of this License for
+verbatim copying of each of the documents in all other respects.
+
+You may extract a single document from such a collection, and distribute
+it individually under this License, provided you insert a copy of this
+License into the extracted document, and follow this License in all
+other respects regarding verbatim copying of that document.
+
+
+\begin{center}
+{\Large\bf 7. AGGREGATION WITH INDEPENDENT WORKS\par}
+\end{center}
+
+
+A compilation of the Document or its derivatives with other separate
+and independent documents or works, in or on a volume of a storage or
+distribution medium, is called an ``aggregate'' if the copyright
+resulting from the compilation is not used to limit the legal rights
+of the compilation's users beyond what the individual works permit.
+When the Document is included in an aggregate, this License does not
+apply to the other works in the aggregate which are not themselves
+derivative works of the Document.
+
+If the Cover Text requirement of section~3 is applicable to these
+copies of the Document, then if the Document is less than one half of
+the entire aggregate, the Document's Cover Texts may be placed on
+covers that bracket the Document within the aggregate, or the
+electronic equivalent of covers if the Document is in electronic form.
+Otherwise they must appear on printed covers that bracket the whole
+aggregate.
+
+
+\begin{center}
+{\Large\bf 8. TRANSLATION\par}
+\end{center}
+
+
+Translation is considered a kind of modification, so you may
+distribute translations of the Document under the terms of section~4.
+Replacing Invariant Sections with translations requires special
+permission from their copyright holders, but you may include
+translations of some or all Invariant Sections in addition to the
+original versions of these Invariant Sections.  You may include a
+translation of this License, and all the license notices in the
+Document, and any Warranty Disclaimers, provided that you also include
+the original English version of this License and the original versions
+of those notices and disclaimers.  In case of a disagreement between
+the translation and the original version of this License or a notice
+or disclaimer, the original version will prevail.
+
+If a section in the Document is Entitled ``Acknowledgements'',
+``Dedications'', or ``History'', the requirement (section~4) to Preserve
+its Title (section~1) will typically require changing the actual
+title.
+
+
+\begin{center}
+{\Large\bf 9. TERMINATION\par}
+\end{center}
+
+
+You may not copy, modify, sublicense, or distribute the Document
+except as expressly provided under this License.  Any attempt
+otherwise to copy, modify, sublicense, or distribute it is void, and
+will automatically terminate your rights under this License.
+
+However, if you cease all violation of this License, then your license
+from a particular copyright holder is reinstated (a) provisionally,
+unless and until the copyright holder explicitly and finally
+terminates your license, and (b) permanently, if the copyright holder
+fails to notify you of the violation by some reasonable means prior to
+60 days after the cessation.
+
+Moreover, your license from a particular copyright holder is
+reinstated permanently if the copyright holder notifies you of the
+violation by some reasonable means, this is the first time you have
+received notice of violation of this License (for any work) from that
+copyright holder, and you cure the violation prior to 30 days after
+your receipt of the notice.
+
+Termination of your rights under this section does not terminate the
+licenses of parties who have received copies or rights from you under
+this License.  If your rights have been terminated and not permanently
+reinstated, receipt of a copy of some or all of the same material does
+not give you any rights to use it.
+
+
+\begin{center}
+{\Large\bf 10. FUTURE REVISIONS OF THIS LICENSE\par}
+\end{center}
+
+
+The Free Software Foundation may publish new, revised versions
+of the GNU Free Documentation License from time to time.  Such new
+versions will be similar in spirit to the present version, but may
+differ in detail to address new problems or concerns.  See
+\texttt{http://www.gnu.org/copyleft/}.
+
+Each version of the License is given a distinguishing version number.
+If the Document specifies that a particular numbered version of this
+License ``or any later version'' applies to it, you have the option of
+following the terms and conditions either of that specified version or
+of any later version that has been published (not as a draft) by the
+Free Software Foundation.  If the Document does not specify a version
+number of this License, you may choose any version ever published (not
+as a draft) by the Free Software Foundation.  If the Document
+specifies that a proxy can decide which future versions of this
+License can be used, that proxy's public statement of acceptance of a
+version permanently authorizes you to choose that version for the
+Document.
+
+
+\begin{center}
+{\Large\bf 11. RELICENSING\par}
+\end{center}
+
+
+``Massive Multiauthor Collaboration Site'' (or ``MMC Site'') means any
+World Wide Web server that publishes copyrightable works and also
+provides prominent facilities for anybody to edit those works.  A
+public wiki that anybody can edit is an example of such a server.  A
+``Massive Multiauthor Collaboration'' (or ``MMC'') contained in the
+site means any set of copyrightable works thus published on the MMC
+site.
+
+``CC-BY-SA'' means the Creative Commons Attribution-Share Alike 3.0
+license published by Creative Commons Corporation, a not-for-profit
+corporation with a principal place of business in San Francisco,
+California, as well as future copyleft versions of that license
+published by that same organization.
+
+``Incorporate'' means to publish or republish a Document, in whole or
+in part, as part of another Document.
+
+An MMC is ``eligible for relicensing'' if it is licensed under this
+License, and if all works that were first published under this License
+somewhere other than this MMC, and subsequently incorporated in whole
+or in part into the MMC, (1) had no cover texts or invariant sections,
+and (2) were thus incorporated prior to November 1, 2008.
+
+The operator of an MMC Site may republish an MMC contained in the site
+under CC-BY-SA on the same site at any time before August 1, 2009,
+provided the MMC is eligible for relicensing.
+
+
+\begin{center}
+{\Large\bf ADDENDUM: How to use this License for your documents\par}
+\end{center}
+
+To use this License in a document you have written, include a copy of
+the License in the document and put the following copyright and
+license notices just after the title page:
+
+\bigskip
+\begin{quote}
+    Copyright \copyright{}  YEAR  YOUR NAME.
+    Permission is granted to copy, distribute and/or modify this document
+    under the terms of the GNU Free Documentation License, Version 1.3
+    or any later version published by the Free Software Foundation;
+    with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
+    A copy of the license is included in the section entitled ``GNU
+    Free Documentation License''.
+\end{quote}
+\bigskip
+    
+If you have Invariant Sections, Front-Cover Texts and Back-Cover Texts,
+replace the ``with \dots\ Texts.''\ line with this:
+
+\bigskip
+\begin{quote}
+    with the Invariant Sections being LIST THEIR TITLES, with the
+    Front-Cover Texts being LIST, and with the Back-Cover Texts being LIST.
+\end{quote}
+\bigskip
+    
+If you have Invariant Sections without Cover Texts, or some other
+combination of the three, merge those two alternatives to suit the
+situation.
+
+If your document contains nontrivial examples of program code, we
+recommend releasing these examples in parallel under your choice of
+free software license, such as the GNU General Public License,
+to permit their use in free software.
+
+%---------------------------------------------------------------------
+
+\end{document}
